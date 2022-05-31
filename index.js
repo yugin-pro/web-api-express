@@ -41,9 +41,10 @@ app.get('/:appName*//', (req, res) => {
   let data = {
     header:{
       scriptUrls:appS.getScriptList(),
-      cssUrls: appS.getCssList()
+      cssUrls: appS.getCssList(),
+      navText:'welcome to ' + appName,
     },
-    navText:'welcome to ' + appName,
+    
   }
   ejs.renderFile('./views/app.ejs', data, {}, function(err, str){
     // str => Rendered HTML string
