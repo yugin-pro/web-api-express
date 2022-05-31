@@ -8,20 +8,22 @@
 
     <title>password-generator</title>
 
-    <% header.scriptUrls.forEach(function(source){ %>
+    <% if(header.scriptUrls) { %>
+    <% header.scriptUrls && header.scriptUrls.forEach(function(source){ %>
       <script defer="defer" src="<%= source %>"></script>
     <% }); %>  
-
-    <% header.cssUrls.forEach(function(source){ %>
+    <% }; %> 
+    <% if(header.cssUrls) { %>  
+    <% header.cssUrls && header.cssUrls.forEach(function(source){ %>
       <link href="<%= source %>" rel="stylesheet">
     <% }); %>  
-    
+    <% }; %> 
   </head>
   <body>
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <span class="navbar-text">
-            <%= navText %>
+            <%= header.navText %>
           </span>
         </div>
       </nav>

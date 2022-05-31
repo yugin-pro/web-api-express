@@ -20,7 +20,9 @@ app.get('/', (req, res) => {
   // let output = appList.map(appN => `<a href=${appN}>${appN}</a>`)
   // res.send(output.join(' </br> '))
   let data = {
-    navText:'welcome to web app store',
+    header:{
+      navText:'welcome to web app store',
+    },
     appList:appList
   }
   ejs.renderFile('./views/store.ejs', data, {}, function(err, str){
