@@ -1,9 +1,10 @@
 const path = require('node:path');
 const fs =  require('node:fs/promises');
 const express = require('express')
+const ejs = require('ejs');
+const appService = require('./services/AppService.js')
 const app = express()
 const port = 3000
-
 
 const appList = []
 ;
@@ -16,14 +17,37 @@ fs.readdir(path.join(__dirname, "../apps/")).then((dirs) => {
 })
 
 app.get('/', (req, res) => {
-  /*
-  нужно получучить название приложения
-  найти по названиф файл с приложением
-  отправить ответ с страницей приложения
-  */
-  let output = appList.map(appN => `<a href=${appN}>${appN}</a>`)
-  res.send(output.join(' </br> '))
+  // let output = appList.map(appN => `<a href=${appN}>${appN}</a>`)
+  // res.send(output.join(' </br> '))
+  let data = {
+    navText:'welcome to web app store',
+    appList:appList
+  }
+  ejs.renderFile('./views/store.ejs', data, {}, function(err, str){
+    // str => Rendered HTML string
+    res.send(str)
+  });
+  
 })
+
+app.get('/:appName*//', (req, res) => {
+
+  //res.send( JSON.stringify(req.params) )
+
+  let {appName} = req.params
+  let appS = new appService(appName)
+  let data = {
+    header:{
+      scriptUrls:appS.getScriptList(),
+      cssUrls: appS.getCssList()
+    },
+    navText:'welcome to ' + appName,
+  }
+  ejs.renderFile('./views/app.ejs', data, {}, function(err, str){
+    // str => Rendered HTML string
+    res.send(str)
+  });
+});
 
 app.post('/api/*', (req, res) => {
   try {

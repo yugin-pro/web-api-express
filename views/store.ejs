@@ -1,0 +1,19 @@
+<%- include('common/header') -%>
+
+<div class="container px-4 py-5">
+  <h2 class="border-bottom">APP list</h2>
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <% appList.forEach(function(app){ %>
+    <div class="card" style="width: 18rem;">
+      <img src="/<%= app %>/key.png" class="card-img-top" alt="<%= app %>">
+      <div class="card-body">
+        <h5 class="card-title"><%= app %></h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="/<%= app %>" class="btn btn-primary">Go <%= app %></a>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+</div>
+
+<%- include('common/footer') -%>
