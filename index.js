@@ -40,6 +40,7 @@ app.get('/:appName*//', (req, res) => {
   let appS = new appService(appName)
   let data = {
     header:{
+      appName: appS.name,
       scriptUrls:appS.getScriptList(),
       cssUrls: appS.getCssList(),
       navText:'welcome to ' + appName,
